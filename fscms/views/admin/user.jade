@@ -1,0 +1,22 @@
+//
+   Created by zf on 2016/1/18.
+
+extends ../public/layout
+block content
+    table(class="table")
+        - each user in users
+            tr
+                td=user.username
+                td=user.password
+                td=user.mail
+                td
+                    a(href='/users/del/'+user.id+'')<input class='btn-danger' type='button' value='删除'>
+                    &nbsp
+                    a(href='/users/change/'+user.id+'')<input class='btn-primary' type='button' value='修改'>
+                    &nbsp
+                    a(href='/users/talk/'+user.id+'')<input class='btn-primary' type='button' value='查看其评论'>
+
+
+
+
+

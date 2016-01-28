@@ -1,0 +1,37 @@
+//
+   Created by zf on 2016/1/22.
+extends ../public/layout
+block content
+    table(class="table")
+        tr
+            td id
+            td 分类
+            td 上级id
+            td 操作
+
+
+            -each table in lables
+                tr
+                    td=table.lableid
+                    td=table.lablename
+                    td=table.f_id
+                    td
+                        a(href="lable/del/" + table._id)
+                            input(class="btn-danger" type="button" value="删除")
+                        a(href="lable/change/" + table._id)
+                            input(class="btn-primary" type="button" value="修改")
+            tr
+                td(colspan=4) 新增分类
+            form(method="post")
+                tr
+                    td
+                        input(type="text" class="form-control" name="lableid")
+                    td
+                        input(type="text" class="form-control" name="lablename")
+                    td
+                        input(type="text" class="form-control" name="f_id")
+                    td
+                        input(type="submit" class="btn-default" value="新增")
+
+
+

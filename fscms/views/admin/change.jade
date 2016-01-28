@@ -1,0 +1,19 @@
+//
+   Created by zf on 2016/1/27.
+extends ../public/layout
+block content
+   table(class="table")
+      -each val in clable
+         tr
+            td(colspan=4) 修改分类
+         form(method="post")
+            tr
+               td
+                  input(type="hidden" value="#{val._id}" name="_id")
+                  input(type="text" class="form-control" name="lableid" value="#{val.lableid}")
+               td
+                  input(type="text" class="form-control" name="lablename" value="#{val.lablename}")
+               td
+                  input(type="text" class="form-control" name="f_id" value="#{val.f_id}")
+               td
+                  input(type="submit" class="btn-default" value="确认修改")
