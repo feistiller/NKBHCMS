@@ -1,0 +1,18 @@
+//
+   Created by zf on 2016/1/28.
+extends ../public/layout
+block content
+   table(class="table")
+      form(method="post")
+         tr 新增文章
+         tr
+            td 文章标题
+            td
+               input(name="articlename" type="text" class="table-control")
+         tr
+            td 文章分类
+
+            td
+               -each lable in lables
+                  select(name="lableid")
+                     option(value=#{label.lableid}) #{lable.lablename}

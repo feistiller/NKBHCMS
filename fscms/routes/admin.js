@@ -147,8 +147,17 @@ router.get('/lable/del/:lable_id', function (req, res) {
 
 //后台文章录入模块
 router.get('/newarticle', function (req, res) {
-    res.render('admin/newarticle', {
-        title: "文章录入"
+    Lable.find({}, function (err, lables) {
+        if (err) {
+            callback(err)
+        } else {
+
+            res.render('admin/newarticle', {
+                title: "文章录入",
+                lables: lables
+
+            })
+        }
     })
 })
 router.post('/newarticle', function (req, res) {
