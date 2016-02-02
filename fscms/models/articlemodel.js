@@ -13,10 +13,12 @@ var articleSchema = new Schema({
     //用来记录文章标签
     articlename:String,
     articletext:String,
-    articledata:String,
+    articledate:String,
     articlewriter:String,
-    articleview:String
+    articleview:String,
     //观看次数
+    articlestate:String
+    //文章的状态
 
 
 });

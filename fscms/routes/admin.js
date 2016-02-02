@@ -161,26 +161,123 @@ router.get('/newarticle', function (req, res) {
     })
 })
 router.post('/newarticle', function (req, res) {
-
+    var article=new Article({
+        articlename:req.body.articlename,
+        articledate:req.body.articledate,
+        articleview:req.body.articleview,
+        lableid:req.body.lableid,
+        articletext:req.body.articletext,
+        articlewriter:"admin",
+        //文章状态初始化为1，未审核阶段
+        articlestate:1
+    })
+    article.save(function (err) {
+        if (err) {
+            callback(err)
+        } else {
+            res.redirect('/admin/article')
+        }
+    })
 })
 
 //后台文章管理模块
 router.get('/article', function (req, res) {
+    Article.find({}, function (err, articles) {
+        if (err) {
+            callback(err)
+        } else {
+
+            res.render('admin/article', {
+                title: "文章管理",
+                articles: articles
+
+            })
+        }
+    })
 
 })
 
 //后台文章修改
 router.get('/article/change/:article_id', function (req,res) {
+    Article.find({_id:req.params.article_id}, function (err, article) {
+        if(err){
+            callback(err)
+        }else{
+            Lable.find({lableid:article[0].lableid}, function (err, lables) {
+                if(err){
+                    callback(err)
+                }else{
+                    res.render('admin/articlechange',{
+                        title:"文章修改",
+                        article:article,
+                        lables:lables
+                    })
+                }
+            })
+
+        }
+    })
 
 })
 router.post('/article/change/:article_id', function (req, res) {
+    var article={
+        articlename:req.body.articlename,
+        articledate:req.body.articledate,
+        articleview:req.body.articleview,
+        lableid:req.body.lableid,
+        articletext:req.body.articletext,
+        articlewriter:"admin",
+        //文章状态重新初始化为1，未审核阶段
+        articlestate:1
+    }
+    Article.update({_id:req.params.article_id},{$set:article}, function (err) {
+        if(err){
+            callback()
+        }else{
+            res.redirect('/admin/article')
+        }
+    })
 
 })
 
 //后台文章删除
 router.get('/article/del/:article_id', function (req, res) {
+    Article.remove({_id:req.params.article_id}, function (err) {
+        if(err){
+            callback(err)
+        }else{
+            res.redirect('/admin/article')
+        }
+    })
 
 })
 
+//后台审核通过
+router.get('/article/agree/:article_id', function (req, res) {
+    var updata={
+        articlestate:2
+    }
+    Article.update({_id:req.params.article_id},{$set:updata}, function (err) {
+        if(err){
+            callback(err)
+        }else{
+            res.redirect('/admin/article')
+        }
+    })
+})
+
+//后台文章审核不通过
+router.get('/article/disagree/:article_id', function (req, res) {
+    var updata={
+        articlestate:1
+    }
+    Article.update({_id:req.params.article_id},{$set:updata}, function (err) {
+        if(err){
+            callback(err)
+        }else{
+            res.redirect('/admin/article')
+        }
+    })
+})
 
 module.exports = router;

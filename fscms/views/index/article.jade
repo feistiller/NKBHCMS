@@ -1,0 +1,26 @@
+//
+   Created by zf on 2016/2/2.
+extends ../public/layout
+block content
+   h1(class="page__title text-center") #{article[0].articlename}
+   h3(class="section__subtitle") #{article[0].articlewriter} #{article[0].articledate}
+   br
+   h3(class="section__subtitle") 已经被阅读#{article[0].articleview}
+   div(class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8") #{article[0].articletext}
+   div
+      table(class="table")
+         tr 评论
+            -each talk in talks
+               tr
+                  td #{talk.talktext}
+                  td #{talk.userid} 发表于#{talk.talkdate}
+               tr
+                  td
+                     a(href="/articletalk/up"+talk._id)#{talk.talkup}赞
+                  td
+                     a(href="/articletalk/down/"+talk._id)#{talk.talkdown}踩
+         br
+         form(method="post")
+            tr
+               input(name="talktext" class="form-control")
+               input(type="submit" value="提交" class="btn-primary")

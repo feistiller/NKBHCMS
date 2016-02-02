@@ -1,5 +1,15 @@
 var express = require('express');
 var router = express.Router();
+//标签模型引入
+var lablemodel = require('../models/lablemodel');
+var Lable = lablemodel.Lable;
+//文章模型引入
+var articlemodel = require('../models/articlemodel');
+var Article = articlemodel.Article;
+//文章评论引入
+var talkmodel=require('../models/talkmodel');
+var Talk=talkmodel.Talk;
+
 
 /* GET home page. */
 //1./主页
@@ -14,10 +24,31 @@ router.get('/user/:user', function (req, res) {
 });
 
 //3./article
-router.get('/article/:name/:day/:title', function (req, res) {
+router.get('/article/:articleid', function (req, res) {
+    Article.find({_id:req.params.article_id}, function (err, article) {
+      if(err){
+        callback(err)
+      }else{
+        Lable.find({lableid:article[0].lableid}, function (err, lables) {
+          if(err){
+            callback(err)
+          }else{
+            Talk.find({articleid:req.params.articleid}, function (err, talks) {
+              res.render('index/article',{
+                title:"文章详情",
+                article:article,
+                lables:lables,
+                talks:talks
+              })
+            })
 
+          }
+        })
+
+      }
+    })
 });
-router.post('/article/:name/:day/:title', function (req, res) {
+router.post('/article/:articleid', function (req, res) {
 
 });
 //4./type

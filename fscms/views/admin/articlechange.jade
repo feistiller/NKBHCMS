@@ -1,0 +1,44 @@
+//
+   Created by zf on 2016/2/2.
+
+extends ../public/layout
+block content
+    table(class="table")
+        form(method="post")
+            tr 修改文章
+            -each val in article
+                tr
+                    td 文章标题
+                    td
+                        input(value="#{val.articlename}" name="articlename" class="form-control")
+
+                tr
+                    td 文章分类
+                    td
+                       -each lable in lables
+                           select(name="lableid" class="form-control" value="#{val.lableid}")
+                               option(value="#{lable.lableid}") #{lable.lablename}
+                tr
+                    td 文章日期
+                    td
+                        input(name="articledate" type="date" value="#{val.articledate}")
+                tr
+                    td 文章阅读量
+                    td
+                        input(name="articleview" type="text" class="form-control" value="#{val.articleview}")
+                tr
+                    td 文章内容
+                    td
+                        textarea(name="articletext" id="area" style="width:1000px;height:200px;") #{val.articletext}
+                tr
+                    td 提交
+                    td
+                        input(type="submit" value="提交修改" class="btn-primary")
+        //新增CSS文件或者是JS
+block header
+    script(type="text/javascript", src="/javascripts/nicEdit.js")
+    script(type="text/javascript").
+        var niceditor;
+        bkLib.onDomLoaded(function () {
+            niceditor = new nicEditor({fullPanel: true}).panelInstance('area');
+        });
