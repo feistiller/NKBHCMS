@@ -14,6 +14,18 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin=require('./routes/admin');
 
+//ex4 session 使用范例
+//var session = require('express-session');
+//var connect = require('connect');
+//var SessionStore = require("session-mongoose")(connect);
+//app.use(session({
+//  secret: settings.cookie_secret,
+//  store: new SessionStore({
+//    url: "mongodb://localhost/session",
+//    interval: 120000
+//  })
+//}));
+
 
 var app = express();
 
@@ -28,15 +40,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-  resave:false,//添加这行
-  saveUninitialized: true,//添加这行
-  secret: 'fs',
-  key: 'fs',
-  cookie: { maxAge: 20000}
-}));
+//app.use(session({
+//  resave:false,//添加这行
+//  saveUninitialized: true,//添加这行
+//  secret: 'fs',
+//  key: 'fs',
+//  cookie: { maxAge: 20000}
+//}));
 //app.use(session({ secret: 'fs',  ,cookie: { maxAge: 20000}}));
 //app.use(session({secret: settings.cookieSecret,store: new MongoStore({db: settings.db})}));
+//算了，最新的session-mongodb居然不支持最新的express和connect也是醉了，只能自己写mongo，但是实在懒得写，扔到之后的版本吧
+app.use(session({
+  secret: 'nkbh', // 随机字符串加密
+  cookie: { maxAge: 60 * 1000 }
+}));
+
+;
 app.use('/', routes);
 app.use('/users', users);
 app.use('/admin',admin);

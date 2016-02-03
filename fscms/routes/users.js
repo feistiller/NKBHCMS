@@ -61,6 +61,7 @@ router.post('/login', function (req, res) {
         if(usercherk.password!=user.password){
             res.send("用户名或者密码输入错误")
         }else{
+            req.session.username=user.username
            res.send("登录成功")
         }
     });
@@ -138,17 +139,17 @@ router.get('/del/:user_id', function (req, res) {
 });
 
 //cherk login or not
-function checkLogin(req, res, next) {
-    if (!req.session.user) {
-        req.flash('error', 'U not login');
-        res.redirect('/login');
+function checkLogin(req, res) {
+    if (!req.session.username) {
+        res.redirect('../users/login')
+        return 0
+    }else{
+        return 1
     }
-    next();
 }
 
 function checkNotLogin(req, res, next) {
-    if (req.session.user) {
-        req.flash('error', 'Repeat login');
+    if (req.session.username) {
         res.redirect('back');
     }
     next();

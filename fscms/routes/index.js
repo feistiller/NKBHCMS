@@ -1,4 +1,5 @@
 var express = require('express');
+var moment = require('moment');
 var router = express.Router();
 //标签模型引入
 var lablemodel = require('../models/lablemodel');
@@ -10,35 +11,52 @@ var Article = articlemodel.Article;
 var talkmodel=require('../models/talkmodel');
 var Talk=talkmodel.Talk;
 
+var lables=Lable.find();
+
 
 /* GET home page. */
 //1./主页
 router.get('/', function(req, res, next) {
-  res.render('index', { title: '主页' });
+  Article.find({}, function (err, articles) {
+    if (err) {
+      callback(err)
+    } else {
+      Lable.find({}, function (err, lables) {
+        if(err){
+          callback()
+        }else{
+          res.render('index', {
+            title: "NKBH CMS系统v0.1",
+            articles: articles,
+            lables:lables
+
+          })
+        }
+      })
+
+
+    }
+  })
 });
-//2./user信息页
-router.get('/user/:user', function (req, res) {
 
-  res.render('index', {title: 'Expresss'});
 
-});
-
-//3./article
-router.get('/article/:articleid', function (req, res) {
+//3./article文章详情与评论详情
+router.get('/article/:article_id', function (req, res) {
     Article.find({_id:req.params.article_id}, function (err, article) {
       if(err){
         callback(err)
       }else{
-        Lable.find({lableid:article[0].lableid}, function (err, lables) {
+        Lable.find({lableid:article[0].lableid}, function (err, lable) {
           if(err){
             callback(err)
           }else{
-            Talk.find({articleid:req.params.articleid}, function (err, talks) {
+            Talk.find({articleid:req.params.article_id}, function (err, talks) {
               res.render('index/article',{
                 title:"文章详情",
                 article:article,
-                lables:lables,
-                talks:talks
+                lable:lable,
+                talks:talks,
+                lables:lables
               })
             })
 
@@ -48,12 +66,43 @@ router.get('/article/:articleid', function (req, res) {
       }
     })
 });
-router.post('/article/:articleid', function (req, res) {
-
+//评论的写入
+router.post('/article/:article_id', function (req, res) {
+  if(checkLogin(req,res)) {
+    var talk = new Talk({
+      articleid: req.params.article_id,
+      userid:req.session.username,
+      //评论内容
+      talktext: req.body.talktext,
+      talkdate: moment().format('L'),
+      //评论点赞
+      talkup: 0,
+      talkdown: 0,
+    })
+    talk.save(function (err) {
+      if (err) {
+        callback()
+      } else {
+        res.redirect('/article/' + req.params.article_id)
+      }
+    })
+  }
 });
-//4./type
-router.get('/type', function () {
+//4./type根据类型查找到其文章目录
+router.get('/type/:lableid', function (req,res) {
+  Article.find({lableid:req.params.lableid}, function (err, articles) {
+    if (err) {
+      callback(err)
+    } else {
 
+          res.render('index', {
+            title: "NKBH CMS系统v0.1",
+            articles: articles,
+            lables:lables
+
+          })
+        }
+      })
 });
 router.post('/type', function () {
 
@@ -72,55 +121,14 @@ router.get('/reg', function () {
 router.post('/post', function () {
 
 });
-//7./login
-router.get('/login', function () {
 
-});
-router.post('/login', function () {
-
-});
-//8./lgout
-router.post('/lgout', function () {
-
-});
-//9./admin/index
-router.get('/admin/index', function () {
-
-});
-router.post('/admin/index', function () {
-
-});
-//10./admin/aindex
-router.get('/admin/aindex', function () {
-
-});
-//11./admin/type
-router.get('/admin/type', function () {
-
-});
-router.post('/admin/type', function () {
-
-});
-//12./admin/article
-router.get('/admin/article/:name/:day/:title', function () {
-
-});
-router.post('/admin/article/:name/:day/:title', function () {
-
-});
-//13./admin/reindex
-router.get('/admin/reindex', function () {
-
-});
-//14./admin/user
-router.get('/admin/user', function () {
-  var users={}
-  res.render('/admin/user', {
-    title: '主页',
-    users:users
-  });
-
-
-});
-
+//检测session登录
+function checkLogin(req, res) {
+  if (!req.session.username) {
+    res.redirect('../users/login')
+    return 0
+  }else{
+    return 1
+  }
+}
 module.exports = router;

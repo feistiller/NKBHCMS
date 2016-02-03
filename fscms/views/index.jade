@@ -3,3 +3,11 @@ extends public/layout
 block content
   h1= title
   p Welcome to #{title}
+  -each article in articles
+    div(class="row")
+      div(class="col-col-md-12")
+        a(href="/article/"+article._id)
+          h1 #{article.articlename}
+          p #{article.articletext}
+
+

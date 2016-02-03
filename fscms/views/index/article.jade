@@ -16,9 +16,9 @@ block content
                   td #{talk.userid} 发表于#{talk.talkdate}
                tr
                   td
-                     a(href="/articletalk/up"+talk._id)#{talk.talkup}赞
+                     a(href="/articletalk/up/"+talk._id) #{talk.talkup}赞
                   td
-                     a(href="/articletalk/down/"+talk._id)#{talk.talkdown}踩
+                     a(href="/articletalk/down/"+talk._id) #{talk.talkdown}踩
          br
          form(method="post")
             tr
