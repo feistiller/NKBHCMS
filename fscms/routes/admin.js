@@ -32,10 +32,15 @@ router.post('/login', function (req, res) {
         if (usercherk.password != user.password) {
             res.send("用户名或者密码输入错误")
         } else {
-            res.send("登录成功")
+            //res.send("登录成功")
+            res.redirect('/admin/index')
         }
     });
 });
+//后台主页路由
+router.get('/index', function (req, res) {
+    res.render('admin/aindex')
+})
 
 //后台新增用户模块
 router.get('/newuser', function (req, res) {

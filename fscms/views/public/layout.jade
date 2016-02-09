@@ -9,6 +9,7 @@ html
         link(rel='stylesheet', href='/stylesheets/bootstrap.min.css',type='text/css', media='all')
         // jQuery (necessary for Bootstrap's JavaScript plugins)
         script(src='/javascripts/jquery.min.js')
+        script(src='/javascripts/bootstrap.min.js')
         // Custom Theme files
         link(href='/stylesheets/style.css', rel='stylesheet', type='text/css', media='all')
         // Custom Theme files
@@ -36,7 +37,7 @@ html
             .container
                 .header-main
                     .logo
-                        a(href='index.html')
+                        a(href='/')
                             img(src='/images/logo.png', alt='')
                     .top-nav
                         span.menu
@@ -44,17 +45,20 @@ html
                         nav.cl-effect-1
                             ul.res
                                 li
-                                    a.scroll(href='../../../')
+                                    a(href='/')
                                         span(data-hover='Home') 主页
                                 li
-                                    a.scroll(href='../../../#About')
-                                        span(data-hover='About') CMS简介
+                                    a(href='../../../#About')
+                                        span(data-hover='About') 简介
                                 li
-                                    a.scroll(href='../../../#Services')
+                                    a(href='../../../#Services')
                                         span(data-hover='Services') 功能与架构
                                 li
-                                    a(href='../../../article')
-                                        span(data-hover='article') 新闻
+                                    a(href='/articles')
+                                        span(data-hover='articles') 新闻
+
+                                    //a(href='../../../article')
+                                    //    span(data-hover='article') 新闻分类
                                 li
                                     a(href='../../../users/login')
                                         span(data-hover='login') 登录
