@@ -2,96 +2,101 @@
    Created by zf on 2016/2/6.
 extends public/layout
 block content
-    .banner
-        .container
-            #home.banner-main
-                .bann-right
-                    h1 We are Proffasional in
-                    h2 Photography
-                    p
-                        | We each try to keep our photo shoots loose and relaxed and geared toward you all having fun together as a family.
-                    img(src='images/ftr-logo.png', alt='')
-                .clearfix
-    // header end here
-    .copyrights
-        | Collect from
-        a(href='http://www.cssmoban.com/') 企业网站模板
-    // about start here
-    #About.about
-        .container
-            .about-main
-                .col-md-3.about-left
-                .col-md-9.about-right
-                    .about-top
-                        h3 About
-                        h5 we are proffasional in photography
-                        ul
-                            li
-                                p
-                                    | I remember thinking, as a child, it was taking forever to grow up. I counted each milestone – teen years, learner’s permit, license and finally, adulthood.
-                            li
-                                p
-                                    | I finally grew up. I met my husband, and we had our own children. And now, as a parent, I can’t believe how fast time is going.
+    -each val in mindex
+        .banner
+            .container
+                #home.banner-main
+                    .bann-right
+                        h1 #{val.title1}
+                        h2 #{val.title2}
                         p
-                            | It’s too fast, and while I want to remember every minute of it, I’m often surprised when my husband reminds me of something I’ve already forgotten.
-                    .worker
-                        h4 THE TEAM
-                        p It’s too fast, and while I want to remember every minute of it,
-                        p
-                        .col-md-4.team-grid
-                            img(src='images/t1.jpg', alt='')
-                        .col-md-4.team-grid
-                            img(src='images/t2.jpg', alt='')
-                        .col-md-4.team-grid
-                            img(src='images/t3.jpg', alt='')
-                        .clearfix
-                .clearfix
-    // about end here
-    // services start here
-    #Services.services
-        .container
-            .services-main
-                .ser-top
-                    h3 SERVICES
-                    h4 I want to remember every minute of it, I’m often surprised.
-                .ser-bottom
-                    .ser-grid
-                        .col-md-8.ser-left
-                            h5 Special Event Photgraphy
-                            p
-                                | It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
-                        .col-md-4.ser-right
-                            img(src='images/bike.png', alt='')
-                        .clearfix
-                    .ser-grid
-                        .col-md-4.ser-left.wlta
-                            img(src='images/dotts.png', alt='')
-                        .col-md-8.ser-right.wltatext
-                            h5 Familly Photgraphy
-                            p
-                                | It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
-                        .clearfix
-                    .ser-grid
-                        .col-md-8.ser-left
-                            h5 Wedding Photgraphy
-                            p
-                                | It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
-                        .col-md-4.ser-right
-                            img(src='images/wedding.png', alt='')
+                            | #{val.content1}
+                        img(src='images/ftr-logo.png', alt='')
+                    .clearfix
+        // header end here
+        .copyrights
+            | Collect from
+            a(href='http://www.cssmoban.com/') 企业网站模板
+        // about start here
+        #About.about
+            .container
+                .about-main
+                    .col-md-3.about-left
+                    .col-md-9.about-right
+                        .about-top
+                            h3 关于
+                            h5 #{val.title3}
+                            ul
+                                li
+                                    p
+                                        | #{val.content2}
+
+                    .clearfix
+        // about end here
+        // services start here
+        #Services.services
+            .container
+                .services-main
+                    .ser-top
+                        h3 提供的服务
+                        h4 我所能提供的所有服务内容
+                    .ser-bottom
+                        .ser-grid
+                            .col-md-8.ser-left
+                                h5 #{val.stitle1}
+                                p
+                                    | #{val.scontent1}
+                            .col-md-4.ser-right
+                                img(src='images/bike.png', alt='')
+                            .clearfix
+                        .ser-grid
+                            .col-md-4.ser-left.wlta
+                                img(src='images/dotts.png', alt='')
+                            .col-md-8.ser-right.wltatext
+                                h5 #{val.stitle2}
+                                p
+                                    | #{val.scontent2}
+                            .clearfix
+                        .ser-grid
+                            .col-md-8.ser-left
+                                h5 #{val.stitle3}
+                                p
+                                    | #{val.scontent3}
+                            .col-md-4.ser-right
+                                img(src='images/wedding.png', alt='')
+                            .clearfix
                         .clearfix
                     .clearfix
-                .clearfix
-    // services end here
+        // services end here
 
-    // price start here
-    #Pricing.price
-        .container
-            .price-main
-                .price-top
-                    h3 PRICING
-                    h4 Lorem ipsum dolor sit amet, consectetur adipisicing elit
+        // price start here
+        #Pricing.price
+            .container
+                .price-main
+                    .price-top
+                        h3 联系我们
+                        h4 您可以选择不同的方式与我们取得联系
+                    .col-1
+                        |您可以使用
+                        a(href="") 站内信
+                        |的方式,或者直接使用以下联系方式：
+                        br
+                        br
+                        br
+                        br
 
-                p
-                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-    // price end here
+                    .row
+                        .col-md-4
+                            span(class="glyphicon glyphicon-envelope" aria-hidden="true")
+                            span mail：#{val.email}
+
+                        .col-md-4
+                            span(class="glyphicon glyphicon-asterisk" aria-hidden="true")
+                            span phone:#{val.phone}
+
+                        .col-md-4
+                            span(class="glyphicon glyphicon-heart" aria-hidden="true")
+                            span QQ:#{val.qq}
+
+        // price end here
 

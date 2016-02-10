@@ -1,41 +1,42 @@
 //
    Created by zf on 2016/1/28.
-
 extends ../public/alayout
 block content
-    table(class="table")
-        form(method="post")
-            tr 新增文章
-            tr
-                td 文章标题
-                td
-                    input(name="articlename" type="text" class="form-control")
-            tr
-                td 文章分类
+    .col-1
+        table(class="table")
+            form(method="post")
+                tr
+                    td(colspan=2) 新增文章
+                tr
+                    td 文章标题
+                    td
+                        input(name="articlename" type="text" class="form-control")
+                tr
+                    td 文章分类
 
-                td
-                    -each lable in lables
-                        select(name="lableid" class="form-control")
-                            option(value="#{lable.lableid}") #{lable.lablename}
-            tr
-                td 文章日期
+                    td
+                        -each lable in lables
+                            select(name="lableid" class="form-control")
+                                option(value="#{lable.lableid}") #{lable.lablename}
+                tr
+                    td 文章日期
 
-                td
-                    input(name="articledate" type="date")
-            tr
-                td 文章阅读量
+                    td
+                        input(name="articledate" type="date")
+                tr
+                    td 文章阅读量
 
-                td
-                    input(name="articleview" type="text" value="0" class="form-control")
-            tr
-                td 文章内容
+                    td
+                        input(name="articleview" type="text" value="0" class="form-control")
+                tr
+                    td 文章内容
 
-                td
-                    textarea(name="articletext" id="area" style="width:1000px;height:200px;") hello world
-            tr
-                td 提交
-                td
-                    input(type="submit" value="提交新文章" class="btn-primary")
+                    td
+                        textarea(name="articletext" id="area" style="width:800px;height:200px;") hello world
+                tr
+                    td 提交
+                    td
+                        input(type="submit" value="提交新文章" class="btn-primary")
 //新增CSS文件或者是JS
 block header
     script(type="text/javascript", src="/javascripts/nicEdit.js")

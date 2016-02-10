@@ -26,12 +26,16 @@ block content
                 td
                     -if(article.articlestate== 1)
                         a(href="article/agree/" + article._id)
-                            button(value="审核通过" class="btn-primary") 审核通过
+                            button(value="审核通过" class="btn btn-primary btn-sm") 审核通过
+                            &nbsp
                     -else if(article.articlestate== 2)
                         a(href="article/disagree/" + article._id)
-                            button(value="下线" class="btn-danger") 下线
+                            button(value="下线" class="btn btn-danger btn-sm") 下线
+                            &nbsp
                     a(href="article/change/" + article._id)
-                        button(value="修改" class="btn-default") 修改
+                        button(value="修改" class="btn btn-warning btn-sm") 修改
+                        &nbsp
                     a(href="article/del/" + article._id)
-                        button(value="删除" class="btn-danger") 删除
+                        button(value="删除" class="btn btn-danger btn-sm") 删除
+                        &nbsp
 

@@ -102,31 +102,31 @@ html
                 nav.templatemo-left-nav
                     ul
                         li
-                            a.active(href='#')
+                            a.active(href='/admin/index')
                                 i.fa.fa-home.fa-fw
                                 | 管理主页
                         li
-                            a(href='data-visualization.html')
+                            a(href='/admin/article')
                                 i.fa.fa-bar-chart.fa-fw
                                 | 文章管理
                         li
-                            a(href='data-visualization.html')
+                            a(href='/admin/newlable')
                                 i.fa.fa-database.fa-fw
                                 | 便签管理
                         li
-                            a(href='maps.html')
+                            a(href='/admin/cindex')
                                 i.fa.fa-map-marker.fa-fw
                                 | 主页管理
                         li
-                            a(href='manage-users.html')
+                            a(href='/users')
                                 i.fa.fa-users.fa-fw
                                 | 用户管理
                         li
-                            a(href='preferences.html')
+                            a(href='/admin/back')
                                 i.fa.fa-sliders.fa-fw
                                 | 查看反馈
                         li
-                            a(href='login.html')
+                            a(href='/admin/out')
                                 i.fa.fa-eject.fa-fw
                                 | 退出登录
             // Main content
@@ -136,13 +136,13 @@ html
                         nav.templatemo-top-nav.col-lg-12.col-md-12
                             ul.text-uppercase
                                 li
-                                    a.active(href='') 新增文章
+                                    a.active(href='/admin/newarticle') 新增文章
                                 li
-                                    a(href='') 新增用户
+                                    a(href='/admin/newuser') 新增用户
                                 li
-                                    a(href='') 查看反馈
+                                    a(href='/admin/back') 查看反馈
                                 li
-                                    a(href='') 退出登录
+                                    a(href='/admin/out') 退出登录
                 block content
                 footer.text-right
                     p

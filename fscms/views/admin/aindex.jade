@@ -20,63 +20,26 @@ block content
                 p
                     | 该CMS全部代码可以在GitHub上全部找到，所以在此基础上的全部代码符合开源标准，并长期维护此项目，也是我第一个开源项目，恩，之前把GitHub当备份库来着
         .templatemo-flex-row.flex-content-row
-            .col-1
-                .templatemo-content-widget.orange-bg
-                    i.fa.fa-times
-                    .media
-                        .media-left
-                            a(href='#')
-                                img.media-object.img-circle(src='/images/admin/sunset.jpg', alt='Sunset')
-                        .media-body
-                            h2.media-heading.text-uppercase Consectur Fusce Enim
-                            p Phasellus dapibus nulla quis risus auctor, non placerat augue consectetur.
-                .templatemo-content-widget.white-bg
-                    i.fa.fa-times
-                    .media
-                        .media-left
-                            a(href='#')
-                                img.media-object.img-circle(src='/images/admin/sunset.jpg', alt='Sunset')
-                        .media-body
-                            h2.media-heading.text-uppercase Consectur Fusce Enim
-                            p Phasellus dapibus nulla quis risus auctor, non placerat augue consectetur.
-            .col-1
+           .col-1
                 .panel.panel-default.templatemo-content-widget.white-bg.no-padding.templatemo-overflow-hidden
                     i.fa.fa-times
                     .panel-heading.templatemo-position-relative
-                        h2.text-uppercase User Table
+                        h2.text-uppercase 后台基本管理员
                     .table-responsive
                         table.table.table-striped.table-bordered
                             thead
                                 tr
                                     td No.
-                                    td First Name
-                                    td Last Name
-                                    td Username
+                                    td 姓名
+                                    td 权限
+                                    td ip
                             tbody
-                                tr
-                                    td 1.
-                                    td John
-                                    td Smith
-                                    td @jS
-                                tr
-                                    td 2.
-                                    td Bill
-                                    td Jones
-                                    td @bJ
-                                tr
-                                    td 3.
-                                    td Mary
-                                    td James
-                                    td @mJ
-                                tr
-                                    td 4.
-                                    td Steve
-                                    td Bride
-                                    td @sB
-                                tr
-                                    td 5.
-                                    td Paul
-                                    td Richard
-                                    td @pR
+                                -each auser in ausers
+                                    tr
+                                        td No.
+                                        td #{auser.username}
+                                        td #{auser.power}
+                                        td 000.000.000.000
+
 
 

@@ -1,0 +1,70 @@
+//
+   Created by zf on 2016/2/10.
+extends ../public/alayout
+block content
+   table(class="table")
+      form(method="post")
+         -each val in mindex
+            tr
+               td(colspan=2) 主页面修改
+               input(class="hidden" name="_id" value=val._id)
+            tr
+               td 主页大标题
+               td
+                  input(class="form-control" name="title1" value=val.title1)
+            tr
+               td 主页二标题
+               td
+                  input(class="form-control" name="title2" value=val.title2)
+            tr
+               td 主页内容1
+               td
+                  input(class="form-control" name="content1" value=val.content1)
+            tr
+               td 关于标题
+               td
+                  input(class="form-control" name="title3" value=val.title3)
+            tr
+               td 标题内容
+               td
+                  input(class="form-control" name="content2" value=val.content2)
+            tr
+               td 服务标题1
+               td
+                  input(class="form-control" name="stitle1" value=val.stitle1)
+            tr
+               td 服务内容1
+               td
+                  input(class="form-control" name="scontent1" value=val.scontent1)
+            tr
+               td 服务标题2
+               td
+                  input(class="form-control" name="stitle2" value=val.stitle2)
+            tr
+               td 服务内容2
+               td
+                  input(class="form-control" name="scontent2" value=val.scontent2)
+            tr
+               td 服务标题3
+               td
+                  input(class="form-control" name="stitle3" value=val.stitle3)
+            tr
+               td 服务内容3
+               td
+                  input(class="form-control" name="scontent3" value=val.scontent3)
+            tr
+               td 联系email
+               td
+                  input(class="form-control" name="email" value=val.email)
+            tr
+               td 联系Phone
+               td
+                  input(class="form-control" name="phone" value=val.phone)
+            tr
+               td 联系QQ
+               td
+                  input(class="form-control" name="qq" value=val.qq)
+            tr
+               td
+               td
+                  input(class='btn btn-primary' value="提交修改" type="submit")

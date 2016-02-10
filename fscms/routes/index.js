@@ -10,6 +10,9 @@ var Article = articlemodel.Article;
 //文章评论引入
 var talkmodel=require('../models/talkmodel');
 var Talk=talkmodel.Talk;
+//前台页面内容引入
+var mindexmodel=require('../models/indexmodel');
+var Mindex=mindexmodel.Mindex;
 
 var lables=Lable.find();
 
@@ -17,23 +20,18 @@ var lables=Lable.find();
 /* GET home page. */
 //1./主页
 router.get('/', function(req, res, next) {
-  Article.find({}, function (err, articles) {
+  Mindex.find({}, function (err, mindex) {
     if (err) {
       callback(err)
     } else {
-      Lable.find({}, function (err, lables) {
-        if(err){
-          callback()
-        }else{
+
           res.render('index', {
             title: "NKBH CMS系统v0.1",
-            articles: articles,
-            lables:lables
+            //articles: articles,
+            //lables:lables,
+            mindex:mindex
 
           })
-        }
-      })
-
 
     }
   })

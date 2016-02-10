@@ -17,9 +17,10 @@ block content
                     td=table.f_id
                     td
                         a(href="lable/del/" + table._id)
-                            input(class="btn-danger" type="button" value="删除")
+                            input(class="btn btn-danger " type="button" value="删除")
+                        &nbsp
                         a(href="lable/change/" + table._id)
-                            input(class="btn-primary" type="button" value="修改")
+                            input(class="btn btn-primary" type="button" value="修改")
             tr
                 td(colspan=4) 新增分类
             form(method="post")
@@ -31,7 +32,7 @@ block content
                     td
                         input(type="text" class="form-control" name="f_id")
                     td
-                        input(type="submit" class="btn-default" value="新增")
+                        input(type="submit" class="btn btn-default" value="新增")
 
 
 

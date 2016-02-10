@@ -13,6 +13,10 @@ var Lable = lablemodel.Lable;
 //文章模型引入
 var articlemodel = require('../models/articlemodel');
 var Article = articlemodel.Article;
+//前台页面内容引入
+var mindexmodel=require('../models/indexmodel');
+var Mindex=mindexmodel.Mindex;
+
 
 //后台登录模块
 router.get('/', function (req, res, next) {
@@ -39,7 +43,17 @@ router.post('/login', function (req, res) {
 });
 //后台主页路由
 router.get('/index', function (req, res) {
-    res.render('admin/aindex')
+    Auser.find({}, function (err,ausers) {
+        if(err){
+            jsonpCallback();
+        }else{
+            res.render('admin/aindex',{
+                title:'后台主页',
+                ausers:ausers
+            })
+        }
+    })
+
 })
 
 //后台新增用户模块
@@ -284,5 +298,89 @@ router.get('/article/disagree/:article_id', function (req, res) {
         }
     })
 })
+
+//主页标签修改
+router.get('/cindex', function (req, res) {
+
+    Mindex.find({}, function (err,mindex2) {
+        if(err){
+            jsonpCallback();
+        }else{
+            if(mindex2[0]==null) {
+                var mindex1={mindex:[{
+                    title1:0,
+                    title2:0,
+                    content1:0,
+                    title3:0,
+                    content2:0,
+                    stitle1:0,
+                    stitle2:0,
+                    stitle3:0,
+                    scontent1:0,
+                    scontent2:0,
+                    scontent3:0,
+                    email:0,
+                    phone:0,
+                    qq:0
+                }]
+
+                }
+                res.render('admin/cindex',{
+                    title:"主页面修改",
+                    mindex:mindex1
+                })
+            }else{
+                res.render('admin/cindex',{
+                    title:"主页面修改",
+                    mindex:mindex2
+                })
+            }
+
+        }
+    })
+})
+
+router.post('/cindex', function (req, res) {
+    var cindex={
+        title1:req.body.title1,
+        title2:req.body.title2,
+        content1:req.body.content1,
+        title3:req.body.title3,
+        content2:req.body.content2,
+        stitle1:req.body.stitle1,
+        stitle2:req.body.stitle2,
+        stitle3:req.body.stitle3,
+        scontent1:req.body.scontent1,
+        scontent2:req.body.scontent2,
+        scontent3:req.body.scontent3,
+        email:req.body.email,
+        phone:req.body.phone,
+        qq:req.body.qq
+    }
+    //判断是新增还是修改
+    if(req.body._id==0||req.body._id==null){
+        mindex=new Mindex(cindex)
+        mindex.save(function (err) {
+            if(err){
+                callback()
+            }else{
+                res.redirect('/admin/cindex')
+            }
+        })
+    }else{
+        Mindex.update({_id:req.body._id},{$set:cindex}, function (err) {
+            if(err){
+                callback()
+            }else{
+                res.redirect('/admin/cindex')
+            }
+        })
+    }
+
+})
+
+//主页图片修改
+
+
 
 module.exports = router;
