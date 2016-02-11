@@ -13,8 +13,13 @@ var Talk=talkmodel.Talk;
 //前台页面内容引入
 var mindexmodel=require('../models/indexmodel');
 var Mindex=mindexmodel.Mindex;
+//反馈引入
+var mailmodel=require('../models/mailmodel');
+var Mail=mailmodel.Mail;
 
-var lables=Lable.find();
+//全部页面查询文章分类
+//2.1版取消先不做，做成产品展示式的不是CMS文章优先
+//var lables=Lable.find();
 
 
 /* GET home page. */
@@ -37,6 +42,20 @@ router.get('/', function(req, res, next) {
   })
 });
 
+//文章的分类与主页
+router.get('/articles', function (req, res) {
+  Article.find({}, function (err, articles) {
+    Lable.find({}, function (err, lables) {
+      res.render('index/articles',{
+        title:'新闻列表',
+        articles:articles,
+        lables:lables
+
+      })
+    })
+  })
+})
+
 
 //3./article文章详情与评论详情
 router.get('/article/:article_id', function (req, res) {
@@ -49,13 +68,22 @@ router.get('/article/:article_id', function (req, res) {
             callback(err)
           }else{
             Talk.find({articleid:req.params.article_id}, function (err, talks) {
-              res.render('index/article',{
-                title:"文章详情",
-                article:article,
-                lable:lable,
-                talks:talks,
-                lables:lables
+              var articleview={
+                articleview:parseInt(article[0].articleview)+1
+              }
+              Article.update({_id:article[0]._id},{$set:articleview}, function (err) {
+                if(err){
+                  jsonpCallback()
+                }else{
+                  res.render('index/article',{
+                    title:"文章详情",
+                    article:article,
+                    lable:lable,
+                    talks:talks
+                  })
+                }
               })
+
             })
 
           }
@@ -102,14 +130,25 @@ router.get('/type/:lableid', function (req,res) {
         }
       })
 });
-router.post('/type', function () {
 
+//5./mail站内信模式
+router.get('/mail', function (req,res) {
+  res.render('index/mail',{
+    title:'站内信'
+  })
 });
-//5./post
-router.get('/post', function () {
-
-});
-router.post('/post', function () {
+router.post('/mail', function (req,res) {
+  var mail=new Mail({
+    contact:req.body.contact,
+    content:req.body.content
+  })
+  mail.save(function (err) {
+    if(err){
+      jsonpCallback();
+    }else{
+      res.redirect('/')
+    }
+  })
 
 });
 //6./reg

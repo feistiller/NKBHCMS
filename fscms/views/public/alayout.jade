@@ -122,13 +122,13 @@ html
                                 i.fa.fa-users.fa-fw
                                 | 用户管理
                         li
-                            a(href='/admin/back')
+                            a(href='/admin/mail')
                                 i.fa.fa-sliders.fa-fw
                                 | 查看反馈
                         li
-                            a(href='/admin/out')
+                            a(href='/users/logout')
                                 i.fa.fa-eject.fa-fw
-                                | 退出登录
+                                | 退出
             // Main content
             .templatemo-content.col-1.light-gray-bg
                 .templatemo-top-nav-container
@@ -140,9 +140,9 @@ html
                                 li
                                     a(href='/admin/newuser') 新增用户
                                 li
-                                    a(href='/admin/back') 查看反馈
+                                    a(href='/admin/mail') 查看反馈
                                 li
-                                    a(href='/admin/out') 退出登录
+                                    a(href='/users/logout') 退出登录
                 block content
                 footer.text-right
                     p

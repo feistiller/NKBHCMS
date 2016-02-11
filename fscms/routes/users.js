@@ -9,6 +9,10 @@ var router = express.Router();
 var usermodel = require('../models/usermodel');
 //User是models.js返回的实例,exports.User = mongoose.model("User",userSchema);
 var User = usermodel.User;
+//文章评论引入
+var talkmodel=require('../models/talkmodel');
+var Talk=talkmodel.Talk;
+
 
 /* GET users listing. 路由开始处*/
 //添加注册页面显示
@@ -62,13 +66,14 @@ router.post('/login', function (req, res) {
             res.send("用户名或者密码输入错误")
         }else{
             req.session.username=user.username
-           res.send("登录成功")
+           res.redirect('/')
         }
     });
 });
 
 //用户管理
 router.get('/', function (req, res) {
+    checkNotLogin(req, res)
     User.find({}, function (err,users) {
         if (err) {
             callback(err);
@@ -84,6 +89,7 @@ router.get('/', function (req, res) {
 
 //用户个体和密码重置
 router.get('/change/:user_id', function (req, res) {
+    checkNotLogin(req, res)
     User.find({_id:req.params.user_id},function (err, user) {
         if(err){
             callback(err)
@@ -99,6 +105,7 @@ router.get('/change/:user_id', function (req, res) {
 
 })
 router.post('/change/:user_id', function (req, res) {
+    checkNotLogin(req, res)
     if(req.body.new_password!=req.body.renew_password){
         res.send('密码不成功')
     }else{
@@ -111,6 +118,13 @@ router.post('/change/:user_id', function (req, res) {
         })
     }
 
+})
+//查询用户评论
+router.get('/talk/:user_id', function (req, res) {
+    checkNotLogin(req, res)
+    Talk.find({userid:req.params.user_id}, function (err,talks) {
+        res.render('index/talks')
+    })
 })
 
 //查询用户的文章
@@ -128,6 +142,7 @@ router.get('/query/:user', function (req, res) {
 //删除'
 router.get('/del/:user_id', function (req, res) {
     //console.log(req.params.user_id);
+    checkNotLogin(req, res)
     User.remove({_id:req.params.user_id}, function (err, doc) {
         if (err) {
             callback(err);
@@ -138,21 +153,43 @@ router.get('/del/:user_id', function (req, res) {
     });
 });
 
+//用户退出
+router.get('/logout', function (req, res) {
+    req.session.destroy()
+    res.redirect('/')
+})
+
 //cherk login or not
-function checkLogin(req, res) {
-    if (!req.session.username) {
-        res.redirect('../users/login')
-        return 0
-    }else{
-        return 1
+//function checkLogin(req, res) {
+//    if (!req.session.username) {
+//        res.redirect('../users/login')
+//        return 0
+//    }else{
+//        return 1
+//    }
+//}
+
+//检测后台session权限(高级)
+function checkLoginp(req, res) {
+    if (req.session.power == 2) {
+        res.redirect('/admin/index')
+    }
+    if (req.session.power == 3) {
+        res.redirect('/admin/index')
+    }
+
+}
+//检测后台session权限(中级)
+function checkLoginp1(req, res) {
+    if (req.session.power==3) {
+        res.redirect('/admin/index')
     }
 }
-
-function checkNotLogin(req, res, next) {
-    if (req.session.username) {
-        res.redirect('back');
+//是否登录
+function checkNotLogin(req, res) {
+    if (!req.session.username&&!req.session.power) {
+        res.redirect('/admin');
     }
-    next();
 }
 
 

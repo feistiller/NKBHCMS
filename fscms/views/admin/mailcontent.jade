@@ -1,0 +1,12 @@
+//
+   Created by zf on 2016/2/11.
+extends ../public/alayout
+block content
+    -each val in mail
+        .templatemo-content-widget.white-bg.col-12
+            i.fa.fa-times
+            .square
+            h2.templatemo-inline-block 联系方式: #{val.contact}
+            hr
+            p 具体反馈内容：
+            p #{val.content}

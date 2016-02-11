@@ -1,0 +1,19 @@
+//
+   Created by zf on 2016/2/11.
+extends ../public/layout
+block content
+   table(class="table")
+      form(method="post")
+         tr
+            td 输入您的联系方式
+            td
+               input(class='form-control' name='contact' type='text')
+         tr
+            td 输入您需要反馈的信息
+            td
+               textarea(class='form-control' name='content' style="width:800px;height:400px" )
+         tr
+            td
+            td
+               input(type="submit" value="提交反馈")
+

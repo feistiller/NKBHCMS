@@ -1,0 +1,17 @@
+//
+   Created by zf on 2016/2/11.
+extends ../public/alayout
+block content
+   table(class='table')
+      .col-md-1
+         tr
+            td 查看反馈的联系方式
+            td 操作
+         -each mail in mails
+            tr
+               td #{mail.contact}
+               td
+                  a(href='/admin/mail/content/'+mail._id class="btn btn-primary") 查看详情
+                  a(href='/admin/mail/del/'+mail._id class='btn ntn-danger') 删除
+
+

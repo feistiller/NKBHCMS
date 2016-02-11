@@ -1,0 +1,25 @@
+//
+   Created by zf on 2016/2/11.
+extends ../public/layout
+block content
+    .container
+        .row
+            .col-md-12
+
+                h1 新闻分类
+        .row
+            -each lable in lables
+                .col-md-3
+                    h3
+                        a(href='/seach/' + lable._id) #{lable.lablename}
+        table(class="table table-striped")
+            -each article in articles
+
+                    tr
+                        td
+                            a(href='/article/' + article._id) #{article.articlename}
+                        td
+                            a(href='/article/' + article._id) #{article.articledate}
+
+
+
